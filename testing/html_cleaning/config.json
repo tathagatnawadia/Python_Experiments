@@ -1,0 +1,25 @@
+{
+    "removal":{
+        "absolute":{
+            "javascript": true,
+            "css"       : true
+        },
+        "tags":{
+            "destructive": {
+                "code"      : true,
+                "iframe"    : true,
+                "link"      : true
+            },
+            "constructive": {
+                "a"         : true,
+                "h1"        : true,
+                "body"      : true,
+                "head"      : true
+            }
+        },
+        "attributes":{
+            "src"           : true,
+            "href"          : true
+        }
+    }
+}
