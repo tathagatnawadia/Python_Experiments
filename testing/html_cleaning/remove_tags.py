@@ -16,8 +16,8 @@ class Config():
 		self.settings = json.load(open(self.file_path))
 
 	def dump(self):
-		print self.file_path
-		print self.settings
+		print(self.file_path)
+		print(self.settings)
 
 class HTML_Cleaner(object):
 	"""This class has
