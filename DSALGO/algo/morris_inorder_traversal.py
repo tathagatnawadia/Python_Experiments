@@ -1,3 +1,10 @@
+'''
+This traverses tree without recursion and stack 
+with O(n) time and O(1) space
+
+It can be used to find the kth smallest element in a BST
+or a median in a BST
+'''
 class Node:
 	def __init__(self, data):
 		self.data = data
@@ -23,13 +30,16 @@ def MorrisTraversal(root):
 			# Making current as right child of its inorder predecessor
 			if pre.right is None:
 				pre.right = current
+				# PREORDER
+				print(current.data)
 				current = current.left
 
 			# Revert the changes made in if part to restore 
 			# original tree
 			else:
 				pre.right = None
-				print(current.data)
+				# INORDER
+				# print(current.data)
 				current = current.right
 
 
