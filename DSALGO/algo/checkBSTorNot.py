@@ -1,38 +1,40 @@
 class Node:
-	def __init__(self, data):
-		self.data = data
-		self.left = None
-		self.right = None
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+INT_MAX = 999999999
+INT_MIN = -INT_MAX
+voilations = []
+def isBST(head, min, max):
+    global voilations
+    if head is None:
+        return True
+    if head:
+        if head.data < min or head.data > max:
+            voilations.append(head)
+            return False
+        leftSubtreeResult = isBST(head.left, min, head.data-1)
+        rightSubtreeResult = isBST(head.right, head.data+1, max)
+        return (leftSubtreeResult and rightSubtreeResult)
 
 
-def isBST(root, left=None, right=None):
-	# Base condition
-	if root is None:
-		return True
+'''
+        10
+        / \
+        5  3
+        /\
+        2 20
+        \30
+''' 
+root = Node(10)
+root.right = Node(3)
+root.left = Node(5)
+root.left.left = Node(2)
+root.left.right = Node(20)
+root.left.left.right = Node(30)
 
-	# If node is on the left the it should be smaller than its ancestor
-	if left is not None and root.data < left.data:
-		return False
-	# If node is on right should be greater than ancestor
-	if right is not None and root.data > right.data:
-		return False
-	
-	return isBST(root.left, left, root) and isBST(root.right, root, right)
-
-
-# Driver program to test above function
-""" 
-Constructed binary tree is
-            15
-          /   \
-        11      33
-      /  \
-      1    14
-"""
-root = Node(4)
-root.left = Node(2)
-root.right = Node(5)
-root.left.left = Node(1)
-root.left.right = Node(3)
-
-print(isBST(root))
+isBST(root, INT_MIN, INT_MAX)
+for voilation in voilations:
+    print(voilation.data)
