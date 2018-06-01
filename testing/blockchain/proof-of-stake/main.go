@@ -239,17 +239,30 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Creating a genesis block for the block chain and adding it to the global blockchain
+	/*
+	------------------------------------------------------
+	Purpose : Create Genesis block and add it to the blockchain
+	------------------------------------------------------
+	*/
 	genesisBlock := generateGenesisBlock()
 	ethereum.Blockchain = append(ethereum.Blockchain, genesisBlock)
 
-	// start TCP and serve TCP server
+	/*
+	------------------------------------------------------
+	Purpose : Open a tcp connection for nodes to join via nc
+	------------------------------------------------------
+	*/
 	server, err := net.Listen("tcp", ":"+os.Getenv("ADDR"))
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer server.Close()
 
+	/*
+	------------------------------------------------------
+	Purpose : Add the blocks coming in via nodes from the channel CandidateBlocks to TempBlock for pickWinningValidator
+	------------------------------------------------------
+	*/
 	go func() {
 		for candidate := range ethereum.CandidateBlocks {
 			mutex.Lock()
@@ -258,12 +271,23 @@ func main() {
 		}
 	}()
 
+
+	/*
+	------------------------------------------------------
+	Purpose : Decide the winner from the tempBlocks and then empty it
+	------------------------------------------------------
+	*/
 	go func() {
 		for {
 			pickWinningValidator()
 		}
 	}()
 
+	/*
+	------------------------------------------------------
+	Purpose : Handler for each node connection which joins the network
+	------------------------------------------------------
+	*/
 	for {
 		conn, err := server.Accept()
 		if err != nil {

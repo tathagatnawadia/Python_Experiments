@@ -53,6 +53,7 @@ func IsBlockValid(newBlock, oldBlock BlockElement.Block) bool {
 	return true
 }
 
+// Assigns arbitary address to the nodes during a connection
 func AssignAddressToNode() string{
 	var buffer bytes.Buffer
 	buffer.WriteString("USER_")
@@ -60,11 +61,8 @@ func AssignAddressToNode() string{
 	buffer.WriteString(sRand)
 	address := buffer.String()
 	if err != nil {
-		// panic!
+		log.Println("Random address generation failed")
 	}
-	log.Println(sRand)
-	//r := rand.New(rand.NewSource(99))
-	//address := s + strconv.Itoa(r.Perm(10)) + strconv.Itoa(r.Perm(222))
 	return address
 }
 
