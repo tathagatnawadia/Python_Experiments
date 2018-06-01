@@ -4,7 +4,7 @@ multiple machines
 nginx nodesjs are using syncio
 cooperative multitasking - when the process itself that it is waitng for some i/o and lets the processor
 to switch to a different thing
-'''
+''' 
 
 from collections import namedtuple
 from datetime import datetime

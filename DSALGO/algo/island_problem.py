@@ -26,7 +26,7 @@ class Graph:
         # column numbers of 8 neighbours 
         # of a given cell
         rowNbr = [-1, -1, -1,  0, 0,  1, 1, 1];
-            colNbr = [-1,  0,  1, -1, 1, -1, 0, 1];
+        colNbr = [-1,  0,  1, -1, 1, -1, 0, 1];
          
         # Mark this cell as visited
         visited[i][j] = True
